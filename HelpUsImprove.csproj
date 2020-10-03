@@ -163,6 +163,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
+    <Content Include="install\HelpUsImprove_00.00.01_Install.zip" />
+    <Content Include="install\HelpUsImprove_00.00.01_Source.zip" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
