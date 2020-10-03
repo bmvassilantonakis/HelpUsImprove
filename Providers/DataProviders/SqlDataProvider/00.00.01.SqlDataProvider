@@ -1,0 +1,258 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/
+
+/****** Object:  Table [dbo].[HUI_HelpUsImprove]    Script Date: 10/3/2020 8:37:46 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[HUI_HelpUsImprove](
+	[HelpUsImproveID] [int] IDENTITY(1,1) NOT NULL,
+	[Found] [bit] NULL,
+	[LookingFor] [nvarchar](max) NULL,
+	[Suggestions] [nvarchar](max) NULL,
+	[HUIDateTime] [datetime] NULL,
+	[CreatedBy] [nvarchar](max) NULL,
+	[CreatedUserID] [int] NULL,
+	[ModifiedBy] [nvarchar](max) NULL,
+	[ModifiedUserID] [int] NULL,
+	[CreatedDate] [datetime] NULL,
+	[ModifiedDate] [datetime] NULL,
+ CONSTRAINT [PK_HUI_HelpUsImprove] PRIMARY KEY CLUSTERED 
+(
+	[HelpUsImproveID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[HUI_GetHUIData]    Script Date: 10/3/2020 8:39:32 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Bartholomew-Michael G. Vassilantonakis
+-- Create date: 7/04/2019
+-- Description:	
+-- =============================================
+CREATE PROCEDURE [dbo].[HUI_GetHUIData] 
+	-- Add the parameters for the stored procedure here
+	@HelpUsImproveID int = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT [HelpUsImproveID]
+		,[Found]
+		,[LookingFor]
+		,[Suggestions]
+		,[HUIDateTime]
+		,[CreatedBy]
+		,[CreatedUserID]
+		,[ModifiedBy]
+		,[ModifiedUserID]
+		,[CreatedDate]
+		,[ModifiedDate]
+	FROM [dbo].[HUI_HelpUsImprove]
+	WHERE (@HelpUsImproveID = 0 OR [HelpUsImproveID] = @HelpUsImproveID)
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[HUI_InsertHUIData]    Script Date: 10/3/2020 8:39:36 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Bartholomew-Michael G. Vassilantonakis
+-- Create date: 7/04/2019
+-- Description:	
+-- =============================================
+CREATE PROCEDURE [dbo].[HUI_InsertHUIData] 
+	-- Add the parameters for the stored procedure here
+	@Found bit = NULL,
+	@LookingFor nvarchar(MAX) = NULL,
+	@Suggestions nvarchar(MAX) = NULL,
+	@HUIDateTime datetime = NULL,
+	@CreatedBy nvarchar(MAX) = NULL,
+	@CreatedUserID int = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    DECLARE @CurrentDT datetime
+    SET @CurrentDT = GETDATE()
+    SET @HUIDateTime = GETDATE()
+
+	IF (@LookingFor = '') BEGIN SET @LookingFor = NULL END
+	IF (@LookingFor = '') BEGIN SET @LookingFor = NULL END
+	IF (@Suggestions = '') BEGIN SET @Suggestions = NULL END
+	IF (@CreatedBy = '') BEGIN SET @CreatedBy = NULL END
+
+	INSERT INTO [dbo].[HUI_HelpUsImprove]
+		([Found]
+		,[LookingFor]
+		,[Suggestions]
+		,[HUIDateTime]
+		,[CreatedBy]
+		,[CreatedUserID]
+		,[ModifiedBy]
+		,[ModifiedUserID]
+		,[CreatedDate]
+		,[ModifiedDate])
+	VALUES
+		(@Found
+		,@LookingFor
+		,@Suggestions
+		,@HUIDateTime
+		,@CreatedBy
+		,@CreatedUserID
+		,@CreatedBy
+		,@CreatedUserID
+		,@CurrentDT
+		,@CurrentDT)
+
+	SELECT [HelpUsImproveID]
+		,[Found]
+		,[LookingFor]
+		,[Suggestions]
+		,[HUIDateTime]
+		,[CreatedBy]
+		,[CreatedUserID]
+		,[ModifiedBy]
+		,[ModifiedUserID]
+		,[CreatedDate]
+		,[ModifiedDate]
+	FROM [dbo].[HUI_HelpUsImprove]
+	WHERE [HelpUsImproveID] = @@IDENTITY
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[HUI_UpdateHUIData]    Script Date: 10/3/2020 8:39:48 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Bartholomew-Michael G. Vassilantonakis
+-- Create date: 7/04/2019
+-- Description:	
+-- =============================================
+CREATE PROCEDURE [dbo].[HUI_UpdateHUIData] 
+	-- Add the parameters for the stored procedure here
+	@HelpUsImproveID int = 0,
+	@Found bit = NULL,
+	@LookingFor nvarchar(MAX) = NULL,
+	@Suggestions nvarchar(MAX) = NULL,
+	@HUIDateTime datetime = NULL,
+	@ModifiedBy nvarchar(MAX) = NULL,
+	@ModifiedUserID int = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    DECLARE @CurrentDT datetime
+    SET @CurrentDT = GETDATE()
+    SET @HUIDateTime = GETDATE()
+
+	IF (@LookingFor = '') BEGIN SET @LookingFor = NULL END
+	IF (@LookingFor = '') BEGIN SET @LookingFor = NULL END
+	IF (@Suggestions = '') BEGIN SET @Suggestions = NULL END
+	IF (@ModifiedBy = '') BEGIN SET @ModifiedBy = NULL END
+
+	UPDATE [dbo].[HUI_HelpUsImprove]
+	SET [Found] = @Found
+		,[LookingFor] = @LookingFor
+		,[Suggestions] = @Suggestions
+		,[HUIDateTime] = @HUIDateTime
+		,[ModifiedBy] = @ModifiedBy
+		,[ModifiedUserID] = @ModifiedUserID
+		,[ModifiedDate] = @CurrentDT
+	WHERE [HelpUsImproveID] = @HelpUsImproveID
+
+	SELECT [HelpUsImproveID]
+		,[Found]
+		,[LookingFor]
+		,[Suggestions]
+		,[HUIDateTime]
+		,[CreatedBy]
+		,[CreatedUserID]
+		,[ModifiedBy]
+		,[ModifiedUserID]
+		,[CreatedDate]
+		,[ModifiedDate]
+	FROM [dbo].[HUI_HelpUsImprove]
+	WHERE [HelpUsImproveID] = @HelpUsImproveID
+END
+GO
+
+/****** Object:  StoredProcedure [dbo].[HUI_DeleteHUIData]    Script Date: 10/3/2020 8:39:53 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+-- =============================================
+-- Author:		Bartholomew-Michael G. Vassilantonakis
+-- Create date: 7/04/2019
+-- Description:	
+-- =============================================
+CREATE PROCEDURE [dbo].[HUI_DeleteHUIData] 
+	-- Add the parameters for the stored procedure here
+	@HelpUsImproveID int = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	IF (@HelpUsImproveID = 0)
+	BEGIN
+		PRINT 'Do Nothing'
+	END
+	ELSE
+	BEGIN
+		DELETE FROM [dbo].[HUI_HelpUsImprove]
+		WHERE [HelpUsImproveID] = @HelpUsImproveID
+	END
+END
+GO
+

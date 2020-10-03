@@ -1,0 +1,40 @@
+
+Bartholomew-Michael G. Vassilantonakis HelpUsImprove Module
+
+--------------------------------------------------------------------------------
+
+* Important *
+
+When creating a project using this template, you should have named your projectsimply "ModuleName", not "Bartholomew-Michael G. VassilantonakisModuleName". If you didn't do this, theeasiest thing to do is close the solution, delete the folder from your DesktopModulesfolder, then create a new project. 
+
+Due to limitations in the templating capabilities of Visual Studio, you will needto make some minor changes, and double check a few things, before you package this module. 
+1. Open up IIS Manager (start>run>INETMGR), go to your dnn.powergr.com website and make sure that DesktopModules is NOT a Virtual Directory/Application, if so, remove that. You can also look at sub directories under that folder that are also virtual directories, right click and remove them as well. 
+2.You will need to change the TARGET Framework to 4.7.2 if you're compiling against DNN 9.5+. Right click on the project, choose properties, change the target. If you change the TARGET framework for the project, remove the WEB.CONFIG file that Visual Studio will add to your project. 
+3.BEFORE checking themodule into your source control environment check the following.
+4.Edit the Project properties by double-clicking on the Properties folder in SolutionExplorer
+5.On the Web tab: 1.Under 'Start Action', make sure to set your Start URL to the correct site (ex: http://dnn.powergr.com/).
+2.Under 'Servers', make sure to "Use IIS Web Server" with a project url of http://dnn.powergr.com/desktopmodules/HelpUsImproveand an Override application root URL of http://dnn.powergr.com/
+
+
+DotNetNuke Module Development Tutorials 
+•Check out our free module development tutorials. 
+
+Steps after your project is setup.
+1.To Build and Package your Module you need to change to Release mode and thensimply choose Build from the Build menu. The MSBuild scripts will do the packagingprocess for you. The packaging process creates an INSTALL and a SOURCE package inthe INSTALL folder within your desktopmodule/modulename folder. 
+2.Installing your module in your development DotNetNuke instance is easy.Take the INSTALL ZIP file that is created in the INSTALL folder, upload that using the Host/Extensionspage, Installation Wizard. Using the INSTALL ZIP file will overwrite the files already in this folder,but that shouldn't cause any problems as long as you install a recent build.
+3.After you've completed a release for your module (typically deploying to an environmentoutside of your development environment) you should change the Version number, youneed to do this in two places, the assemblyinfo file, and the .DNN manifest file.Next time you build the module in release mode you will get a new package (usingthe version number) created.
+4.For more information visit our DotNetNuke Consulting page.
+
+After you are finished reading this Documentation you can delete the Documentation directoryfrom your project. 
+
+--------------------------------------------------------------------------------
+
+
+
+
+.NET Framework: 4.5.1
+
+On the Web Tab on Properties set Start URL to the desire url for development
+
+Under Servers on the same tab set the Project Url to the location of your project and then to the desktopmodule/HelpUsImpove directory
+

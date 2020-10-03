@@ -1,0 +1,37 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/
+
+
+/****** Object:  StoredProcedure [dbo].[HUI_DeleteHUIData]    Script Date: 10/3/2020 8:39:53 AM ******/
+DROP PROCEDURE [dbo].[HUI_DeleteHUIData]
+GO
+
+/****** Object:  StoredProcedure [dbo].[HUI_UpdateHUIData]    Script Date: 10/3/2020 8:39:48 AM ******/
+DROP PROCEDURE [dbo].[HUI_UpdateHUIData]
+GO
+
+/****** Object:  StoredProcedure [dbo].[HUI_InsertHUIData]    Script Date: 10/3/2020 8:39:36 AM ******/
+DROP PROCEDURE [dbo].[HUI_InsertHUIData]
+GO
+
+/****** Object:  StoredProcedure [dbo].[HUI_GetHUIData]    Script Date: 10/3/2020 8:39:32 AM ******/
+DROP PROCEDURE [dbo].[HUI_GetHUIData]
+GO
+
+/****** Object:  Table [dbo].[HUI_HelpUsImprove]    Script Date: 10/3/2020 8:38:22 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[HUI_HelpUsImprove]') AND type in (N'U'))
+DROP TABLE [dbo].[HUI_HelpUsImprove]
+GO
